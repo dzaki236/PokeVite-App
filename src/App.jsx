@@ -32,7 +32,9 @@ const App = () => {
         setPokemonData(response.data);
         console.log(response.data);
       })
-      .catch((e) => {});
+      .catch((e) => {
+        console.log(e);
+      });
   };
   const searchDataPokemon = async () => {
     setLoading(true);
@@ -55,6 +57,7 @@ const App = () => {
         console.log(data);
       })
       .catch((e) => {
+        console.log(e);
         setPokemonName("");
         setDataExists(false);
         setLoading(false);
@@ -164,9 +167,10 @@ const App = () => {
               )}
               <footer className="mt-5">
                 <p>
-                  Created By <a href="https://github.com/dzaki236">Dzaki</a> | <q>Sorry.. a developer don`t know too much
-                  about css :(</q>
-                </p><br/>
+                  Created By <a href="https://github.com/dzaki236">Dzaki</a> |{" "}
+                  <q>Sorry.. a developer don`t know too much about css :(</q>
+                </p>
+                <br />
               </footer>
             </Container>
           </div>
