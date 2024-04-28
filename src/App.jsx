@@ -50,7 +50,7 @@ const App = () => {
       await Axios.get(`${URL}${searchParams}`)
         .then((response) => {
           const data__ = response.data;
-          setPokemonName(data__.name);
+          setPokemonName(data__.name ?? ".");
           setDataExists(true);
           setData({
             name: pokemonName,
@@ -67,9 +67,10 @@ const App = () => {
         })
         .catch((e) => {
           console.log(e);
-          setPokemonName("");
+          setPokemonName(".");
           setDataExists(false);
           setLoading(false);
+          setData([]);
         });
     } catch (error) {
       console.log(error);
@@ -111,7 +112,7 @@ const App = () => {
               <Row className="pt-3">
                 <Col className=" mt-1" xs={12} sm={12} md={6} lg={6} xl={6}>
                   <input
-                    value={searchParams ? searchParams : null}
+                    value={searchParams ? searchParams : ""}
                     className="form-control"
                     type="text"
                     placeholder="Search by name or id"
@@ -124,9 +125,9 @@ const App = () => {
                   </button>
                 </Col>
               </Row>
-              {!dataExists ? (
+              {!dataExists && pokemonName.length === 0 ? (
                 ""
-              ) : pokemonName == "" ? (
+              ) : pokemonName.length === 1 ? (
                 <h1>Pokemon tidak di temukan!</h1>
               ) : (
                 <>
