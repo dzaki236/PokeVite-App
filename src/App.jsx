@@ -24,44 +24,56 @@ const App = () => {
     color: "",
   });
   useEffect(() => {
-    loadPokemonData();
+    try {
+      loadPokemonData();
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
   const loadPokemonData = async () => {
-    await Axios.get(`${URL}`)
-      .then((response) => {
-        setPokemonData(response.data);
-        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    try {
+      await Axios.get(`${URL}`)
+        .then((response) => {
+          setPokemonData(response.data);
+          console.log(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
   const searchDataPokemon = async () => {
-    setLoading(true);
-    await Axios.get(`${URL}${searchParams}`)
-      .then((response) => {
-        const data__ = response.data;
-        setPokemonName(data__.name);
-        setDataExists(true);
-        setData({
-          name: pokemonName,
-          genus: data__.genus,
-          description: data__.description,
-          types: data__.types,
-          stats: data__.stats,
-          imageUrl: data__.imageUrl,
-          abilities: data__.abilities,
-          color: data__.color,
+    try {
+      setLoading(true);
+      await Axios.get(`${URL}${searchParams}`)
+        .then((response) => {
+          const data__ = response.data;
+          setPokemonName(data__.name);
+          setDataExists(true);
+          setData({
+            name: pokemonName,
+            genus: data__.genus,
+            description: data__.description,
+            types: data__.types,
+            stats: data__.stats,
+            imageUrl: data__.imageUrl,
+            abilities: data__.abilities,
+            color: data__.color,
+          });
+          setLoading(false);
+          console.log(data);
+        })
+        .catch((e) => {
+          console.log(e);
+          setPokemonName("");
+          setDataExists(false);
+          setLoading(false);
         });
-        setLoading(false);
-        console.log(data);
-      })
-      .catch((e) => {
-        console.log(e);
-        setPokemonName("");
-        setDataExists(false);
-        setLoading(false);
-      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
