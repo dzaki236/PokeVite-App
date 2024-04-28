@@ -9,7 +9,7 @@ const Loading = () => {
             <Spinner
               style={{ width: "5rem", height: "5rem", marginTop: "20vh" }}
             />
-            <h2>Sedang Mencari Pokemon</h2>
+            <h2>Loading...</h2>
           </center>
         </div>
       </div>
